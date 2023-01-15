@@ -1,0 +1,73 @@
+Web VPython 3.2
+## Electric Field of a Point Charge
+## Last Edited: Jan 10, 2023
+
+scene.width = scene.height = 500
+scene.caption = """To rotate scene, drag with right button or Ctrl-drag.
+To zoom, drag with the middle button or Alt/Option-drag or scroll wheel.
+To pan left/right and up/down, Shift-drag."""
+
+# Constants
+global K
+K = 8.99e9  # Coulomb constant in SI units
+q_e = 1.6e-19   # Electron charge in coulombs
+scalefactor = 1e-20 # Needed to make E-field arrows a reasonable size
+
+# Sphere representing charge qe located at the origin
+r_q = vec(0, 0, 0)
+charge = sphere(pos=r_q, radius=5e-11, color=color.magenta)
+
+# E-field at position r_q due to charge q
+r_obs = vec(-3e-10, 0, 0)
+
+# 3a) Function to calculate electric field 
+def electric_field(r_obs,r_q, electroncharge, plane):
+    r = r_obs - r_q
+    E = K * electroncharge * hat(r)/mag(r)**2.
+    
+    # Arrow at r_obs whose direction is parallel to the E-field vector
+    # and whose length is proportional to the magnitude of E
+    arrow(pos=r, axis=scalefactor * E, color=plane)
+    
+#electric_field(r_obs, r_q, q_e, color.yellow)
+
+# 3b) 
+
+#radius 
+R = [3e-10,6e-10, 9e-10]
+
+#degree of angle 
+a = [0, pi/6, pi/3, pi/2, 2*pi/3, 5*pi/6, pi, 7*pi/6, 8*pi/6, 3*pi/2, 10*pi/6, 11*pi/6, 2*pi]
+
+#list of 12 evenly spaced vectors 
+r_obs_list = [vec(R*cos(a[0]), R*sin(a[0]), 0), vec(R*cos(a[1]), R*sin(a[1]), 0), vec(R*cos(a[2]), R*sin(a[2]), 0), vec(R*cos(a[3]), R*sin(a[3]), 0), vec(R*cos(a[4]), R*sin(a[4]), 0), vec(R*cos(a[5]), R*sin(a[5]), 0), vec(R*cos(a[6]), R*sin(a[6]), 0), vec(R*cos(a[7]), R*sin(a[7]), 0), vec(R*cos(a[8]), R*sin(a[8]), 0), vec(R*cos(a[9]), R*sin(a[9]), 0), vec(R*cos(a[10]), R*sin(a[10]), 0), vec(R*cos(a[11]), R*sin(a[11]), 0)]
+
+for Rad in R: 
+    
+    #list of 12 evenly spaced vectors 
+    r_obs_list = [vec(Rad*cos(a[0]), Rad*sin(a[0]), 0), vec(Rad*cos(a[1]), Rad*sin(a[1]), 0), vec(Rad*cos(a[2]), Rad*sin(a[2]), 0), vec(Rad*cos(a[3]), Rad*sin(a[3]), 0), vec(Rad*cos(a[4]), Rad*sin(a[4]), 0), vec(Rad*cos(a[5]), Rad*sin(a[5]), 0), vec(Rad*cos(a[6]), Rad*sin(a[6]), 0), vec(Rad*cos(a[7]), Rad*sin(a[7]), 0), vec(Rad*cos(a[8]), Rad*sin(a[8]), 0), vec(Rad*cos(a[9]), Rad*sin(a[9]), 0), vec(Rad*cos(a[10]), Rad*sin(a[10]), 0), vec(Rad*cos(a[11]), Rad*sin(a[11]), 0)]
+
+    
+    for r_obs in r_obs_list:
+        electric_field(r_obs, r_q, q_e, color.yellow)
+    
+
+#3c) 
+
+#cirlces in xz plane 
+for Rad in R: 
+    
+    #list of 12 evenly spaced vectors 
+    r_obs_listxz = [vec(Rad*cos(a[0]), 0, Rad*sin(a[0])), vec(Rad*cos(a[1]), 0, Rad*sin(a[1])), vec(Rad*cos(a[2]), 0, Rad*sin(a[2])), vec(Rad*cos(a[3]), 0, Rad*sin(a[3])), vec(Rad*cos(a[4]), 0, Rad*sin(a[4])), vec(Rad*cos(a[5]), 0, Rad*sin(a[5])), vec(Rad*cos(a[6]),0,  Rad*sin(a[6])), vec(Rad*cos(a[7]),0,  Rad*sin(a[7])), vec(Rad*cos(a[8]), 0, Rad*sin(a[8])), vec(Rad*cos(a[9]), 0, Rad*sin(a[9])), vec(Rad*cos(a[10]), 0, Rad*sin(a[10])), vec(Rad*cos(a[11]), 0, Rad*sin(a[11]))]
+    
+    for r_obs in r_obs_listxz:
+        electric_field(r_obs, r_q, q_e, color.blue)
+
+#cirlces in xz plane 
+for Rad in R: 
+    
+    #list of 12 evenly spaced vectors 
+    r_obs_listxz = [vec(0, Rad*cos(a[0]), Rad*sin(a[0])), vec(0, Rad*cos(a[1]), Rad*sin(a[1])), vec(0, Rad*cos(a[2]), Rad*sin(a[2])), vec(0, Rad*cos(a[3]), Rad*sin(a[3])), vec(0, Rad*cos(a[4]), Rad*sin(a[4])), vec(0, Rad*cos(a[5]), Rad*sin(a[5])), vec(0,Rad*cos(a[6]),  Rad*sin(a[6])), vec(0,Rad*cos(a[7]),  Rad*sin(a[7])), vec(0, Rad*cos(a[8]), Rad*sin(a[8])), vec(0, Rad*cos(a[9]), Rad*sin(a[9])), vec(0, Rad*cos(a[10]), Rad*sin(a[10])), vec(0, Rad*cos(a[11]), Rad*sin(a[11]))]
+    
+    for r_obs in r_obs_listxz:
+        electric_field(r_obs, r_q, q_e, color.green)
